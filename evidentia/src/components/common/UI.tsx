@@ -1,0 +1,12 @@
+import {Link} from 'react-router-dom';import {ArrowUpRight,FileVideo,FileText,Activity,AlertCircle,CheckCircle2,Clock3,LoaderCircle,SearchX} from 'lucide-react';import type {ReactNode} from 'react';import type {Status,EvidenceType} from '../../types';
+export function PageTitle({eyebrow,title,description,action}:{eyebrow?:string;title:string;description?:string;action?:ReactNode}){return <div className="page-title"><div>{eyebrow&&<div className="eyebrow">{eyebrow}</div>}<h1>{title}</h1>{description&&<p>{description}</p>}</div>{action&&<div className="title-action">{action}</div>}</div>}
+export function StatusBadge({status}:{status:Status|string}){const cls=status.toLowerCase().replaceAll(' ','-');return <span className={`status status-${cls}`}><i/>{status}</span>}
+export function StatCard({label,value,detail,icon:Icon,tone='teal'}:{label:string;value:string|number;detail:string;icon:any;tone?:string}){return <div className="stat-card"><div className={`stat-icon ${tone}`}><Icon size={19}/></div><div className="stat-label">{label}</div><div className="stat-value">{value}</div><div className="stat-detail">{detail}</div></div>}
+export function EmptyState({title,description,action}:{title:string;description:string;action?:ReactNode}){return <div className="empty-state"><div className="empty-icon"><SearchX size={22}/></div><h3>{title}</h3><p>{description}</p>{action}</div>}
+export function SourceIcon({type}:{type:EvidenceType}){const Icon=type==='video'?FileVideo:type==='witness'?FileText:Activity;return <span className={`source-icon ${type}`}><Icon size={16}/></span>}
+export function EventLink({to,children}:{to:string;children:ReactNode}){return <Link className="event-link" to={to}>{children}<ArrowUpRight size={14}/></Link>}
+export function Loading(){return <div className="loading"><LoaderCircle className="spin"/> Loading investigation data…</div>}
+export function ErrorState({message}:{message:string}){return <div className="notice error"><AlertCircle size={17}/>{message}</div>}
+export function InfoNotice({children}:{children:ReactNode}){return <div className="notice info"><AlertCircle size={17}/>{children}</div>}
+export function formatDate(value:string){if(!value)return 'Date not provided';return new Date(value).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}
+export function formatTime(value?:string){if(!value)return 'Time not provided';return new Date(value).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})}
